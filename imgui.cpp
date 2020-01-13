@@ -3620,7 +3620,6 @@ void ImGui::Shutdown()
     g.MenusIdSubmittedThisFrame.clear();
     g.InputTextState.ClearFreeMemory();
     g.InputTextDeactivatedState.ClearFreeMemory();
-    g.MultiSelectScopeWindow = NULL;
 
     g.SettingsWindows.clear();
     g.SettingsHandlers.clear();
@@ -10886,6 +10885,7 @@ static void ImGui::NavApplyItemToResult(ImGuiNavItemData* result)
     result->FocusScopeId = g.CurrentFocusScopeId;
     result->InFlags = g.LastItemData.InFlags;
     result->RectRel = WindowRectAbsToRel(window, g.LastItemData.NavRect);
+    result->HasSelectionData = (g.NextItemData.Flags & ImGuiNextItemDataFlags_HasSelectionData) != 0; // FIXME: Bizarre but valid we are calling NavApplyItemToResult() before clering the NextItemData
 }
 
 // True when current work location may be scrolled horizontally when moving left / right.
@@ -11415,6 +11415,7 @@ void ImGui::NavInitRequestApplyResult()
         g.NavJustMovedToId = result->ID;
         g.NavJustMovedToFocusScopeId = result->FocusScopeId;
         g.NavJustMovedToKeyMods = 0;
+        g.NavJustMovedToHasSelectionData = result->HasSelectionData;
     }
 
     // Apply result from previous navigation init request (will typically select the first item, unless SetItemDefaultFocus() has been called)
@@ -11663,6 +11664,7 @@ void ImGui::NavMoveRequestApplyResult()
         g.NavJustMovedToId = result->ID;
         g.NavJustMovedToFocusScopeId = result->FocusScopeId;
         g.NavJustMovedToKeyMods = g.NavMoveKeyMods;
+        g.NavJustMovedToHasSelectionData = result->HasSelectionData;
     }
 
     // Apply new NavID/Focus
