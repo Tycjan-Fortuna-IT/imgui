@@ -1939,9 +1939,6 @@ struct ImGuiContext
     ImVec2                  NavWindowingAccumDeltaPos;
     ImVec2                  NavWindowingAccumDeltaSize;
 
-    // Range-Select/Multi-Select
-    ImGuiMultiSelectState   MultiSelectState;                   // FIXME-MULTISELECT: We currently don't support recursing/stacking multi-select
-
     // Render
     float                   DimBgRatio;                         // 0.0..1.0 animation when fading in a dimming background (for modal window and CTRL+TAB list)
 
@@ -1981,6 +1978,9 @@ struct ImGuiContext
     ImPool<ImGuiTabBar>             TabBars;
     ImVector<ImGuiPtrOrIndex>       CurrentTabBarStack;
     ImVector<ImGuiShrinkWidthItem>  ShrinkWidthBuffer;
+
+    // Multi-Select state
+    ImGuiMultiSelectState           MultiSelectState;           // FIXME-MULTISELECT: We currently don't support recursing/stacking multi-select
 
     // Hover Delay system
     ImGuiID                 HoverDelayId;
@@ -3051,7 +3051,7 @@ namespace ImGui
     IMGUI_API bool          IsDragDropPayloadBeingAccepted();
     IMGUI_API void          RenderDragDropTargetRect(const ImRect& bb);
 
-    // New Multi-Selection/Range-Selection API (FIXME-WIP)
+    // Multi-Select API
     IMGUI_API void          MultiSelectItemHeader(ImGuiID id, bool* p_selected);
     IMGUI_API void          MultiSelectItemFooter(ImGuiID id, bool* p_selected, bool* p_pressed);
 
