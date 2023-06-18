@@ -12,6 +12,11 @@ examples/build/*
 examples/*/Debug/*
 examples/*/Release/*
 examples/*/x64/*
+**/bin/
+**/obj/
+bin-int/
+Intermediates/
+**.dll
 
 ## Visual Studio artifacts
 .vs
