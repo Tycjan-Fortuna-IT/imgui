@@ -17,6 +17,14 @@ bin-int/
 Intermediates/
 **.dll
 
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
+
 ## Visual Studio artifacts
 .vs
 ipch
